@@ -45,7 +45,6 @@ Targets can be defined in the `package.json` or `projects.json`. Learn more [in 
 Nx comes with local caching already built-in (check your `nx.json`). On CI you might want to go a step further.
 
 - [Set up remote caching](https://nx.dev/features/share-your-cache)
-- [Set up task distribution across multiple machines](https://nx.dev/nx-cloud/features/distribute-task-execution)
 - [Learn more how to setup CI](https://nx.dev/recipes/ci)
 
 ## Explore the project graph
@@ -60,3 +59,46 @@ It will show tasks that you can run with Nx.
 - [Join the community](https://nx.dev/community)
 - [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
 - [Follow us on Twitter](https://twitter.com/nxdevtools)
+
+##################################################-TODO-##############################################################
+
+# NEXT
+    # Erweiterung DB um Countries
+    # Erweiterung Table um Row = [Employee-ID's] 
+    # Anlegen neuer Employers 
+    # Bearbeiten von Employers 
+
+# RECHTE
+    # [ADMIN] - [EMPLOYER ERSTELLEN], [EMPLOYEE ERSTELLEN], [EMPLOYEE ZUWEISUNG AN EMPLOYER], 
+	# [EMPLOYER] - [EMPLOYEE ERSTELLEN], [EMPLOYEE BEARBEITEN]
+	# [EMPLOYEE] - [EMPLOYEE BEARBEITEN]
+
+
+# Generell
+    # Toasts einbinden
+    # Github Inc.
+    # ToastService aufsetzen
+    # Current-/Logged User Observable setzen
+    # Favicon ändern
+    # Login aufsetzen/einbinden
+
+# v 1.0 Mitarbeiterverwaltung
+    # Employer
+        # Bearbeiten und Speichern
+        # Neue Arbeitgeber Hinzufügen
+        # LogService anfangen
+        # RightService aufsetzen
+        # FlagService aufsetzen
+        # Arbeitgeberliste
+            # Hover auf Stadt Hint: { Land, Bundesland, Postleitzahl, Stadt}
+        # Erweiterung um Gründungsjahr
+    # Employee
+        # Profbild
+
+# v 1.1 
+	# CHATSYSTEM
+	# LANGUAGE-SWITCHER (DEUTSCH, ENGLISCH)
+
+# v 2.0 Projektverwaltung
+
+# v 3.0 Projektzuteilung +Zeitsystem

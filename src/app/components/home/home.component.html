@@ -1,0 +1,51 @@
+<div class="d-flex">
+  <div
+    class="card px-m pt-m pb-l text-navy-90 me-m"
+    style="width: 14rem"
+    *ngIf="isLoggedIn || loggedInAs || loggedInAs"
+  >
+    <div class="d-flex justify-content-between" *ngIf="isLoggedIn">
+      <span class="pe-s">is LoggedIn: </span>
+      <span class="fw-bold">{{ isLoggedIn }}</span>
+    </div>
+    <div class="d-flex justify-content-between" *ngIf="loggedInAs">
+      <span class="pe-s">logged In As: </span>
+      <span class="fw-bold">{{ loggedInAs }}</span>
+    </div>
+    <div class="d-flex justify-content-between" *ngIf="loggedInAs">
+      <span class="pe-s">has Rights: </span>
+      <span class="fw-bold">{{ userRights }}</span>
+    </div>
+  </div>
+
+  <div class="card px-m pt-m pb-l text-navy-60" style="width: fit-content">
+    <span class="mb-s">{{ greeting }}</span>
+    <div class="d-flex">
+      <span class="fw-bold me-m">Aktuelle Zeit</span>
+      <span class="fw-bold text-navy-10"
+        >{{ currentTime | date : 'HH.mm ' }}
+        <span class="fw-normal">Uhr</span></span
+      >
+    </div>
+    <div class="d-flex justify-content-end">
+      <span class="float-sm-end text-navy-10 fw-bold">{{
+        currentTime | date : 'dd.MM.YYYY'
+      }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="new-project-container mt-l d-flex flex-column">
+  <span class="fw-bold text-navy-60">Arbeitgeber</span>
+  <div class="mt-s">
+    <button
+      class="btn btn-secondary me-m text-navy-0"
+      routerLink="/new-employer"
+    >
+      + Arbeitgeber hinzufügen
+    </button>
+    <button class="btn btn-secondary text-navy-0" routerLink="/overview">
+      Arbeitgeberliste
+    </button>
+  </div>
+</div>

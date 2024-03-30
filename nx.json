@@ -54,8 +54,14 @@
       "linter": "eslint",
       "style": "scss",
       "unitTestRunner": "jest"
+    },
+    "@nx/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nx/angular:component": {
+      "style": "css"
     }
   },
-  "defaultProject": "bau",
-  "nxCloudAccessToken": "Yjk4ZTFiZDItOThiYy00Mjg0LTkxZWUtOTJjYjk0YWRjOTJkfHJlYWQtd3JpdGU="
+  "defaultProject": "bau"
 }

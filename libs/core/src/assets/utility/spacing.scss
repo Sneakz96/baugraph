@@ -1,0 +1,211 @@
+@use "./var.scss" as v;
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+$custom-utilities: (
+  "margin": (
+    property: margin,
+    class: m,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "margin-x": (
+    property: margin-right margin-left,
+    class: mx,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "margin-y": (
+    property: margin-top margin-bottom,
+    class: my,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "margin-top": (
+    property: margin-top,
+    class: mt,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "margin-end": (
+    property: margin-inline-end,
+    class: me,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "margin-bottom": (
+    property: margin-bottom,
+    class: mb,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "margin-start": (
+    property: margin-inline-start,
+    class: ms,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "padding": (
+    property: padding,
+    class: p,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "padding-x": (
+    property: padding-right padding-left,
+    class: px,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "padding-y": (
+    property: padding-top padding-bottom,
+    class: py,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "padding-top": (
+    property: padding-top,
+    class: pt,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "padding-end": (
+    property: padding-inline-end,
+    class: pe,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "padding-bottom": (
+    property: padding-bottom,
+    class: pb,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+  "padding-start": (
+    property: padding-inline-start,
+    class: ps,
+    values: (
+      xs: v.$m-xs,
+      s: v.$m-s,
+      m: v.$m-m,
+      l: v.$m-l,
+      xl: v.$m-xl,
+      20p: v.$m-20p,
+      25p: v.$m-25p,
+      40p: v.$m-40p,
+    ),
+  ),
+);
+
+$utilities: map-merge($utilities, $custom-utilities);
+
+@import "bootstrap/scss/utilities/api";

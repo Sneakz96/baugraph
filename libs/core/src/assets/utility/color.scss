@@ -1,0 +1,68 @@
+@use "./var.scss" as v;
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+$custom-utilities: (
+  "color": (
+    property: color,
+    class: text,
+    local-vars: (
+      "text-opacity": 1,
+    ),
+    values:
+      map-merge(
+        $utilities-text-colors,
+        (
+          "mint": v.$mint,
+          "navy-0": v.$navy-0,
+          "navy-10": v.$navy-10,
+          "navy-20": v.$navy-20,
+          "navy-30": v.$navy-30,
+          "navy-40": v.$navy-40,
+          "navy-60": v.$navy-60,
+          "navy-80": v.$navy-80,
+          "navy-100": v.$navy-100,
+        )
+      ),
+  ),
+);
+
+$utilities: map-merge($utilities, $custom-utilities);
+
+$utilities-bg: map-merge(
+  $utilities-colors,
+  (
+    "mint": v.$mint,
+    "navy-0": v.$navy-0,
+    "navy-10": v.$navy-10,
+    "navy-20": v.$navy-20,
+    "navy-30": v.$navy-30,
+    "navy-40": v.$navy-40,
+    "navy-60": v.$navy-60,
+    "navy-80": v.$navy-80,
+    "navy-100": v.$navy-100,
+  )
+);
+
+$utilities-bg-colors: map-loop($utilities-bg, rgba-css-var, "$key", "bg");
+
+$custom-colors: (
+  mint: v.$mint,
+  navy-0: v.$navy-0,
+  navy-10: v.$navy-10,
+  navy-20: v.$navy-20,
+  navy-30: v.$navy-30,
+  navy-40: v.$navy-40,
+  navy-60: v.$navy-60,
+  navy-80: v.$navy-80,
+  navy-100: v.$navy-100,
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "bootstrap/scss/utilities/api";

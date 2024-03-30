@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@use '../libs/core/src/assets/utility/var.scss' as v;
+@use '../libs/core/src/assets/utility/custom-bootstrap.scss';
+
+@import '@ng-select/ng-select/themes/default.theme.css';
+
+html,
+body {
+  height: 100%;
+}
+
+* {
+  letter-spacing: 0.0225rem;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+@import 'bootstrap/dist/css/bootstrap.css';

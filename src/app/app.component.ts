@@ -1,14 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { NavbarComponent } from '@bau/core';
+import { ToastsContainerComponent } from '@bau/toast';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
   selector: 'bau-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  imports: [
+    RouterModule,
+    CommonModule,
+    NavbarComponent,
+    ToastsContainerComponent,
+  ],
 })
-export class AppComponent {
-  title = 'bau';
-}
+export class AppComponent {}

@@ -1,0 +1,122 @@
+<div class="card px-l pt-l pb-xl">
+  <div class="headline text-navy-60">
+    <div class="nav-back mb-m" routerLink="/home">
+      <fa-icon [icon]="['fas', 'arrow-left']" class="p-s"></fa-icon>
+      <span class="fw-bold">zurück</span>
+    </div>
+    <p class="fw-bold fs-xl">Arbeitgeberliste</p>
+  </div>
+
+  <form>
+    <div class="mb-m row">
+      <label for="table-complete-search" class="fw-bold">Search:</label>
+      <div class="d-flex align-items-center justify-content-between">
+        <input
+          id="table-complete-search"
+          type="text"
+          class="form-control w-25"
+          name="searchTerm"
+          [(ngModel)]="employerService.searchTerm"
+        />
+        @if (employerService.loading$ | async) {
+        <span class="col ms-s col-form-label">Loading...</span>
+        }
+        <button
+          class="btn btn-secondary my-s text-navy-0"
+          routerLink="/new-employer"
+        >
+          + Arbeitgeber hinzufügen
+        </button>
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" sortable="employerName" (sort)="onSort($event)">
+            <span class="fs-xs">Name</span>
+          </th>
+          <th scope="col" sortable="employerCountryId" (sort)="onSort($event)">
+            <span class="fs-xs">Land</span>
+          </th>
+          <th scope="col" sortable="employerLocation" (sort)="onSort($event)">
+            <span class="fs-xs">Stadt</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (employer of employers$ | async; track employer.employerId) {
+        <tr class="employer" (click)="openEmployer(employer)">
+          <!-- Id -->
+          <th scope="row">{{ employer.employerId }}</th>
+          <!-- Name -->
+          <td>
+            <ngb-highlight
+              [result]="employer.employerName"
+              [term]="employerService.searchTerm"
+            />
+          </td>
+          <!-- Land -->
+          <td>
+            <img
+              [src]="
+                'https://upload.wikimedia.org/wikipedia/commons/' +
+                employer.employerCountryFlag
+              "
+              class="me-2"
+              style="width: 20px"
+            />
+            <ngb-highlight
+              [result]="getCountryById(employer.employerCountryId)"
+              [term]="employerService.searchTerm"
+            />
+          </td>
+          <!-- Stadt -->
+          <td>
+            <ngb-highlight
+              [result]="employer.employerLocation"
+              [term]="employerService.searchTerm"
+            />
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="4" style="text-align: center">
+            Keine Arbeitgeber gefunden
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="text-navy-10 fs-s">
+        <span class="fw-bold" style="margin-right: 0.188rem">{{
+          (employers$ | async)?.length
+        }}</span
+        >Einträge
+      </div>
+      <ngb-pagination
+        class="pt-s"
+        [collectionSize]="(total$ | async)!"
+        [(page)]="employerService.page"
+        [pageSize]="employerService.pageSize"
+      >
+      </ngb-pagination>
+
+      <select
+        class="form-select"
+        style="width: auto"
+        name="pageSize"
+        [(ngModel)]="employerService.pageSize"
+      >
+        <option [ngValue]="5">5 Einträge</option>
+        <option [ngValue]="10">10 Einträge</option>
+        <option [ngValue]="25">25 Einträge</option>
+        <option [ngValue]="50">50 Einträge</option>
+        <option [ngValue]="100">100 Einträge</option>
+      </select>
+    </div>
+  </form>
+</div>

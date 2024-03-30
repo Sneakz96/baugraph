@@ -1,0 +1,15 @@
+<ngb-toast
+  *ngFor="let toast of toastService.toasts$ | async"
+  [autohide]="toast.autohide"
+  [delay]="toast.delay || defaultDelay"
+  [class]="toast.classname"
+  (hidden)="close(toast)"
+  class="m-m toast"
+>
+  <div class="gap-m px-l pt-l pb-xl">
+    <span class="fw-bold" [innerHTML]="toast.header"></span>
+    <div class="d-flex flex-column gap-m">
+      <span [innerHTML]="toast.body"></span>
+    </div>
+  </div>
+</ngb-toast>

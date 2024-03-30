@@ -1,0 +1,26 @@
+@use './var.scss' as v;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+.headline {
+  .nav-back {
+    font-size: 1.271rem;
+    width: fit-content;
+  }
+
+  span {
+    font-size: 1.871rem;
+  }
+}
+
+.nav-back:hover {
+  cursor: pointer;
+  color: v.$navy-40 !important;
+}
+
+@import 'bootstrap/scss/utilities/api';

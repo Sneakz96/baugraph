@@ -1,0 +1,391 @@
+<div class="card px-l pt-l pb-xl">
+  <div class="headline text-navy-60">
+    <div class="nav-back mb-m" routerLink="/home">
+      <fa-icon [icon]="['fas', 'arrow-left']" class="p-s"></fa-icon>
+      <span class="fw-bold">zurück</span>
+    </div>
+    <span class="fw-bold fs-xl">Fügen Sie einen neuen Arbeitgeber hinzu</span>
+  </div>
+  <div class="mt-3 text-navy-60">
+    <div class="row">
+      <span class="col-10"
+        >Hier haben Sie die Möglichkeit, einen neuen Arbeitgeber hinzuzufügen
+        und wichtige Informationen über ihn zu erfassen. Diese Daten sind
+        entscheidend, um eine solide Grundlage für eine effiziente und
+        erfolgreiche Zusammenarbeit zu schaffen.</span
+      >
+    </div>
+    <form
+      [formGroup]="employerFormGroup"
+      (ngSubmit)="onSubmit()"
+      class="mt-5 text-navy-60"
+    >
+      <span class="fw-bold">Name</span>
+      <div class="row">
+        <div class="pb-s col-6">
+          <label for="employerName">Name</label>
+          <input
+            class="form-control"
+            type="text"
+            id="employerName"
+            formControlName="employerName"
+            [ngClass]="{
+              'invalid-input':
+                employerFormGroup.get('employerName')?.invalid &&
+                (employerFormGroup.get('employerName')?.dirty ||
+                  employerFormGroup.get('employerName')?.touched)
+            }"
+          />
+          <div
+            *ngIf="
+              employerFormGroup.get('employerName')?.invalid &&
+              (employerFormGroup.get('employerName')?.dirty ||
+                employerFormGroup.get('employerName')?.touched)
+            "
+            class="alert d-flex flex-column"
+          >
+            <small
+              *ngIf="employerFormGroup.get('employerName')?.errors?.['required']"
+              >*Name ist erforderlich.</small
+            >
+            <small
+              *ngIf="employerFormGroup.get('employerName')?.errors?.['minlength']"
+            >
+              *Name muss mindestens 4 Buchstaben lang sein.
+            </small>
+            <small
+              *ngIf="employerFormGroup.get('employerName')?.errors?.['maxlength']"
+            >
+              *Name should be max. 16 characters long.
+            </small>
+            <small
+              *ngIf="employerFormGroup.get('employerName')?.errors?.['forbiddenName']"
+              >*Name cannot be Bob.</small
+            >
+          </div>
+        </div>
+      </div>
+      <span class="fw-bold">Anschrift</span>
+      <div class="row">
+        <div class="pb-s col-2">
+          <label for="employerCountry">Land</label>
+          <ng-select
+            [items]="countries"
+            bindLabel="name"
+            bindValue="id"
+            [clearable]="false"
+            formControlName="employerIndustry"
+          >
+          </ng-select>
+        </div>
+        <div class="pb-s col-3">
+          <label for="employerStreet">Straße</label>
+          <input
+            class="form-control"
+            type="text"
+            id="employerStreet"
+            formControlName="employerStreet"
+            [ngClass]="{
+              'invalid-input':
+                employerFormGroup.get('employerStreet')?.invalid &&
+                (employerFormGroup.get('employerStreet')?.dirty ||
+                  employerFormGroup.get('employerStreet')?.touched)
+            }"
+          />
+          <div
+            *ngIf="
+              employerFormGroup.get('employerStreet')?.invalid &&
+              (employerFormGroup.get('employerStreet')?.dirty ||
+                employerFormGroup.get('employerStreet')?.touched)
+            "
+            class="alert d-flex flex-column"
+          >
+            <small
+              *ngIf="employerFormGroup.get('employerStreet')?.errors?.['required']"
+              >*Die Straße muss ausgefüllt sein.</small
+            >
+            <small
+              *ngIf="employerFormGroup.get('employerStreet')?.errors?.['minlength']"
+            >
+              *Name must be at least 4 characters long.
+            </small>
+            <small
+              *ngIf="employerFormGroup.get('employerStreet')?.errors?.['maxlength']"
+            >
+              *Name should be max. 16 characters long.
+            </small>
+          </div>
+        </div>
+        <div class="pb-s col-1">
+          <label for="employerStreetNumber">Hausnr.</label>
+          <input
+            min="1"
+            class="form-control"
+            type="number"
+            id="employerStreetNumber"
+            formControlName="employerStreetNumber"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="pb-s col-3">
+          <label for="employerLocation">Ort</label>
+          <input
+            class="form-control"
+            type="text"
+            id="employerLocation"
+            formControlName="employerLocation"
+            [ngClass]="{
+              'invalid-input':
+                employerFormGroup.get('employerLocation')?.invalid &&
+                (employerFormGroup.get('employerLocation')?.dirty ||
+                  employerFormGroup.get('employerLocation')?.touched)
+            }"
+          />
+          <div
+            *ngIf="
+              employerFormGroup.get('employerLocation')?.invalid &&
+              (employerFormGroup.get('employerLocation')?.dirty ||
+                employerFormGroup.get('employerLocation')?.touched)
+            "
+            class="alert d-flex flex-column"
+          >
+            <small
+              *ngIf="employerFormGroup.get('employerLocation')?.errors?.['required']"
+              >*Die Straße muss ausgefüllt sein.</small
+            >
+            <small
+              *ngIf="employerFormGroup.get('employerLocation')?.errors?.['minlength']"
+            >
+              *Name must be at least 4 characters long.
+            </small>
+            <small
+              *ngIf="employerFormGroup.get('employerLocation')?.errors?.['maxlength']"
+            >
+              *Name should be max. 16 characters long.
+            </small>
+          </div>
+        </div>
+        <div class="pb-s col-3">
+          <label for="employerLocationCode">Postleitzahl</label>
+          <input
+            class="form-control"
+            type="number"
+            id="employerLocationCode"
+            formControlName="employerLocationCode"
+            [ngClass]="{
+              'invalid-input':
+                employerFormGroup.get('employerLocationCode')?.invalid &&
+                (employerFormGroup.get('employerLocationCode')?.dirty ||
+                  employerFormGroup.get('employerLocationCode')?.touched)
+            }"
+          />
+          <div
+            *ngIf="
+              employerFormGroup.get('employerLocationCode')?.invalid &&
+              (employerFormGroup.get('employerLocationCode')?.dirty ||
+                employerFormGroup.get('employerLocationCode')?.touched)
+            "
+            class="alert d-flex flex-column"
+          >
+            <small
+              *ngIf="employerFormGroup.get('employerLocationCode')?.errors?.['required']"
+              >*Die Straße muss ausgefüllt sein.</small
+            >
+            <small
+              *ngIf="employerFormGroup.get('employerLocationCode')?.errors?.['minlength']"
+            >
+              *Name must be at least 4 characters long.
+            </small>
+            <small
+              *ngIf="employerFormGroup.get('employerLocationCode')?.errors?.['maxlength']"
+            >
+              *Name should be max. 16 characters long.
+            </small>
+          </div>
+        </div>
+      </div>
+      <span class="fw-bold">Kontakt</span>
+      <div class="row">
+        <div class="pb-s col-3">
+          <label for="employerEmail">Email-Adresse</label>
+          <input
+            type="text"
+            class="form-control"
+            id="employerEmail"
+            formControlName="employerEmail"
+            [ngClass]="{
+              'invalid-input':
+                employerFormGroup.get('employerEmail')?.invalid &&
+                (employerFormGroup.get('employerEmail')?.dirty ||
+                  employerFormGroup.get('employerEmail')?.touched)
+            }"
+          />
+          <div
+            *ngIf="
+              employerFormGroup.get('employerEmail')?.invalid &&
+              (employerFormGroup.get('employerEmail')?.dirty ||
+                employerFormGroup.get('employerEmail')?.touched)
+            "
+            class="alert d-flex flex-column"
+          >
+            <small
+              *ngIf="employerFormGroup.get('employerEmail')?.errors?.['required']"
+            >
+              * Die E-Mail-Adresse muss ausgefüllt sein.
+            </small>
+            <small
+              *ngIf="employerFormGroup.get('employerEmail')?.errors?.['email']"
+            >
+              * Ungültige E-Mail-Adresse.
+            </small>
+          </div>
+        </div>
+        <div class="pb-s col-3">
+          <label for="employerTelefone">Telefonnummer</label>
+          <input
+            class="form-control"
+            type="text"
+            id="employerTelefone"
+            formControlName="employerTelefone"
+            [ngClass]="{
+              'invalid-input':
+                employerFormGroup.get('employerTelefone')?.invalid &&
+                (employerFormGroup.get('employerTelefone')?.dirty ||
+                  employerFormGroup.get('employerTelefone')?.touched)
+            }"
+          />
+          <div
+            *ngIf="
+              employerFormGroup.get('employerTelefone')?.invalid &&
+              (employerFormGroup.get('employerTelefone')?.dirty ||
+                employerFormGroup.get('employerTelefone')?.touched)
+            "
+            class="alert d-flex flex-column"
+          >
+            <small
+              *ngIf="employerFormGroup.get('employerTelefone')?.errors?.['required']"
+              >*Die Straße muss ausgefüllt sein.</small
+            >
+            <small
+              *ngIf="employerFormGroup.get('employerTelefone')?.errors?.['minlength']"
+            >
+              *Name must be at least 4 characters long.
+            </small>
+            <small
+              *ngIf="employerFormGroup.get('employerTelefone')?.errors?.['maxlength']"
+            >
+              *Name should be max. 16 characters long.
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="pb-s col-6">
+          <label for="employerInternet">Internetseite</label>
+          <input
+            class="form-control"
+            type="text"
+            id="employerInternet"
+            formControlName="employerInternet"
+            [ngClass]="{
+              'invalid-input':
+                employerFormGroup.get('employerInternet')?.invalid &&
+                (employerFormGroup.get('employerInternet')?.dirty ||
+                  employerFormGroup.get('employerInternet')?.touched)
+            }"
+          />
+          <div
+            *ngIf="
+              employerFormGroup.get('employerInternet')?.invalid &&
+              (employerFormGroup.get('employerInternet')?.dirty ||
+                employerFormGroup.get('employerInternet')?.touched)
+            "
+            class="alert d-flex flex-column"
+          >
+          <small
+            *ngIf="employerFormGroup.get('employerInternet')?.errors?.['required']"
+          >
+            *E-Mail muss ausgefüllt sein.
+          </small>
+            <small
+              *ngIf="employerFormGroup.get('employerInternet')?.errors?.['websiteValidator']"
+            >
+              *E-Mail Format ist ungültig.
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <span class="fw-bold">Weitere Informationen</span>
+        <div class="pb-s col-6">
+          <label for="employerIndustry">Branche</label>
+          <ng-select
+            [items]="industries"
+            bindLabel="name"
+            bindValue="id"
+            [clearable]="false"
+            formControlName="employerIndustry"
+            [ngClass]="{
+              'invalid-input':
+                employerFormGroup.get('employerIndustry')?.invalid &&
+                (employerFormGroup.get('employerIndustry')?.dirty ||
+                  employerFormGroup.get('employerIndustry')?.touched)
+            }"
+          >
+          </ng-select>
+          <div
+            *ngIf="
+              employerFormGroup.get('employerIndustry')?.invalid &&
+              (employerFormGroup.get('employerIndustry')?.dirty ||
+                employerFormGroup.get('employerIndustry')?.touched)
+            "
+            class="alert"
+          >
+            <small
+              *ngIf="employerFormGroup.get('employerIndustry')?.errors?.['required']"
+              >*Die Branche der Firma muss ausgefüllt sein.</small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="pb-l col-3">
+          <label for="employeeCount">Anzahl der Mitarbeiter</label>
+          <input
+            class="form-control"
+            type="number"
+            id="employeeCount"
+            formControlName="employeeCount"
+            [ngClass]="{
+              'invalid-input':
+                employerFormGroup.get('employeeCount')?.invalid &&
+                (employerFormGroup.get('employeeCount')?.dirty ||
+                  employerFormGroup.get('employeeCount')?.touched)
+            }"
+          />
+          <div
+            *ngIf="
+              employerFormGroup.get('employeeCount')?.invalid &&
+              (employerFormGroup.get('employeeCount')?.dirty ||
+                employerFormGroup.get('employeeCount')?.touched)
+            "
+            class="alert"
+          >
+            <small
+              *ngIf="employerFormGroup.get('employeeCount')?.errors?.['required']"
+              >*Die Anzahl der Mitarbeiter muss ausgefüllt sein.</small
+            >
+          </div>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        >
+        <!-- [disabled]="employerFormGroup.invalid" -->
+        Arbeitgeber erstellen
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+@use "./var.scss" as v;
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+$custom-utilities: (
+  "line-height": (
+    property: line-height,
+    class: lh,
+    values: (
+      s: v.$lh-s,
+      m: v.$lh-m,
+      l: v.$lh-l,
+      xl: v.$lh-xl,
+    ),
+  ),
+  "font-weight": (
+    property: font-weight,
+    class: fw,
+    values: (
+      100: 100,
+      200: 200,
+      300: 300,
+      400: 400,
+      500: 500,
+      600: 600,
+    ),
+  ),
+  "font-size": (
+    property: font-size,
+    class: fs,
+    values: (
+      xs: v.$fs-xs,
+      s: v.$fs-s,
+      m: v.$fs-m,
+      l: v.$fs-l,
+      xl: v.$fs-xl,
+      hl: v.$fs-hl,
+    ),
+  ),
+);
+
+$utilities: map-merge($utilities, $custom-utilities);
+
+@import "bootstrap/scss/utilities/api";
