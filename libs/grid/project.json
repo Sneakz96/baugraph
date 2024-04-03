@@ -1,0 +1,9 @@
+{
+  "name": "grid",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/grid/src",
+  "prefix": "bau",
+  "tags": [],
+  "projectType": "library",
+  "targets": {}
+}

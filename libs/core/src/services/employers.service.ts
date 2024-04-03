@@ -8,11 +8,8 @@ import {
   SortDirection,
 } from '../../../../src/app/components/overview/sort.directive';
 import { Employer } from '../models/employer';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { INDUSTRIES } from '../../../../src/app/components/employers/new-employers/industries';
-import { COUNTRIES } from '../data/countries';
-import { Industry } from '../models/industrie';
 import { ApiService } from './api.service';
+import { Country } from '../models/country';
 
 interface SearchResult {
   employers: Employer[];
@@ -34,12 +31,11 @@ const compare = (v1: string | number, v2: string | number) =>
 export class EmployerService {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _industries$ = new BehaviorSubject<Industry[]>(INDUSTRIES);
   private _total$ = new BehaviorSubject<number>(0);
 
   employers!: Employer[];
   employers$!: Observable<Employer[]>;
-  countries = COUNTRIES;
+  countries$!: Observable<Country[]>;
 
   private _state: State = {
     page: 1,
@@ -51,7 +47,7 @@ export class EmployerService {
 
   private pipe = inject(DecimalPipe);
   private apiService = inject(ApiService);
-  
+
   constructor() {
     this._search$
       .pipe(
@@ -97,19 +93,22 @@ export class EmployerService {
   }
 
   matches(employer: Employer, term: string, pipe: PipeTransform) {
-    const countryName =
-      this.countries.find(
-        (country) => country.id === employer.employerCountryId
-      )?.name || '';
-    return (
-      employer.employerName.toLowerCase().includes(term.toLowerCase()) ||
-      countryName.toLowerCase().includes(term.toLowerCase()) ||
-      employer.employerLocation.toLowerCase().includes(term.toLowerCase())
+    if (!this.countries$) {
+      return false;
+    }
+    return this.countries$.pipe(
+      map((countries) =>
+        countries.find((country) => country.countryId === employer.employerCountryId)
+      ),
+      map((country) => {
+        const countryName = country ? country.countryName : '';
+        return (
+          employer.employerName.toLowerCase().includes(term.toLowerCase()) ||
+          countryName.toLowerCase().includes(term.toLowerCase()) ||
+          employer.employerLocation.toLowerCase().includes(term.toLowerCase())
+        );
+      })
     );
-  }
-
-  get industries$() {
-    return this._industries$.asObservable();
   }
 
   get total$() {

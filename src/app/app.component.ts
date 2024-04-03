@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from '@bau/core';
-import { ToastsContainerComponent } from '@bau/toast';
 
 @Component({
   standalone: true,
@@ -13,7 +12,9 @@ import { ToastsContainerComponent } from '@bau/toast';
     RouterModule,
     CommonModule,
     NavbarComponent,
-    ToastsContainerComponent,
   ],
 })
-export class AppComponent {}
+export class AppComponent {
+
+  public readonly server_status = '';
+}

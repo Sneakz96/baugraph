@@ -70,11 +70,11 @@
         <div class="pb-s col-2">
           <label for="employerCountry">Land</label>
           <ng-select
-            [items]="countries"
-            bindLabel="name"
-            bindValue="id"
+            [items]="countries$ | async"
+            bindLabel="countryName"
+            bindValue="countryId"
             [clearable]="false"
-            formControlName="employerIndustry"
+            formControlName="employerCountry"
           >
           </ng-select>
         </div>
@@ -303,11 +303,11 @@
             "
             class="alert d-flex flex-column"
           >
-          <small
-            *ngIf="employerFormGroup.get('employerInternet')?.errors?.['required']"
-          >
-            *E-Mail muss ausgefüllt sein.
-          </small>
+            <small
+              *ngIf="employerFormGroup.get('employerInternet')?.errors?.['required']"
+            >
+              *E-Mail muss ausgefüllt sein.
+            </small>
             <small
               *ngIf="employerFormGroup.get('employerInternet')?.errors?.['websiteValidator']"
             >
@@ -321,9 +321,9 @@
         <div class="pb-s col-6">
           <label for="employerIndustry">Branche</label>
           <ng-select
-            [items]="industries"
-            bindLabel="name"
-            bindValue="id"
+            [items]="industries$ | async"
+            bindLabel="industryName"
+            bindValue="industryId"
             [clearable]="false"
             formControlName="employerIndustry"
             [ngClass]="{
@@ -379,10 +379,7 @@
           </div>
         </div>
       </div>
-      <button
-        type="submit"
-        class="btn btn-primary"
-        >
+      <button type="submit" class="btn btn-primary">
         <!-- [disabled]="employerFormGroup.invalid" -->
         Arbeitgeber erstellen
       </button>

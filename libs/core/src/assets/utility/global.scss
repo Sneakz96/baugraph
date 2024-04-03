@@ -20,7 +20,11 @@
 
 .nav-back:hover {
   cursor: pointer;
-  color: v.$navy-40 !important;
+  color: v.$navy-20 !important;
+}
+
+.cursor-pointer:hover {
+  cursor: pointer;
 }
 
 @import 'bootstrap/scss/utilities/api';

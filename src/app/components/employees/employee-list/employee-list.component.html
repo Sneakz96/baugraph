@@ -1,0 +1,85 @@
+<div class="card px-l pt-l pb-xl">
+  <div class="headline text-navy-60 mb-m">
+    <div class="nav-back mb-3" routerLink="/home">
+      <fa-icon [icon]="['fas', 'arrow-left']" class="p-s"></fa-icon>
+      <span class="ms-1 fw-bold fs-l">zurück</span>
+    </div>
+    <span class="fw-bold fs-xl">Arbeitnehmer Übersicht</span>
+  </div>
+  <bau-grid
+  [headerlist]="headerlist"
+  [data]="employees$"
+  ></bau-grid>
+</div>
+
+
+    <!-- <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" sortable="employerName" (sort)="onSort($event)">
+            <span class="fs-xs">Name</span>
+          </th>
+          <th scope="col" sortable="employerCountryId" (sort)="onSort($event)">
+            <span class="fs-xs">Staatsangehörigkeit</span>
+          </th>
+          <th scope="col" sortable="employerCountryId" (sort)="onSort($event)">
+            <span class="fs-xs">Geburtstag</span>
+          </th>
+          <th scope="col" sortable="employerLocation" (sort)="onSort($event)">
+            <span class="fs-xs">E-Mail</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (employee of employees$ | async; track employee.employerId) {
+        <tr class="employer">
+          
+          <th scope="row">{{ employee.employerId }}</th>
+          
+          <td>
+            <ngb-highlight
+              [result]="employee.employeeName"
+              [term]="employeeService.searchTerm"
+            />
+          </td>
+          
+          <td>
+            <ngb-highlight
+              [result]="getCountryById(employee.employeeCountryId) | async"
+              [term]="employeeService.searchTerm"
+            />
+            <img
+              [src]="
+                'https://upload.wikimedia.org/wikipedia/commons/' +
+                countryService.getCountryFlagById(employee.employeeCountryId)
+              "
+              class="me-s"
+              style="width: 20px"
+            />
+            {{ countryService.getCountryNameById(employee.employeeCountryId) }}
+          </td>
+          
+          <td>
+            <ngb-highlight
+              [result]="employee.employeeLocationCode"
+              [term]="employeeService.searchTerm"
+            />
+          </td>
+          
+          <td>
+            <ngb-highlight
+              [result]="employee.employeeEmail"
+              [term]="employeeService.searchTerm"
+            />
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="4" style="text-align: center">
+            Keine Arbeitgeber gefunden
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table> -->

@@ -63,32 +63,29 @@ It will show tasks that you can run with Nx.
 ##################################################-TODO-##############################################################
 
 # NEXT
-    # Erweiterung DB um Countries
-    # Erweiterung Table um Row = [Employee-ID's] 
-    # Anlegen neuer Employers 
-    # Bearbeiten von Employers 
+    # Benachrichtigung ob Backend läuft oder nicht (50%)
+    # Staatsangehörigkeit mit in Employee
+    # Fremdschlüsselbeziehung Employer Employees herstellen
+    # Employer Employees mappen im BE
+    # BackendTests anlegen
 
 # RECHTE
     # [ADMIN] - [EMPLOYER ERSTELLEN], [EMPLOYEE ERSTELLEN], [EMPLOYEE ZUWEISUNG AN EMPLOYER], 
 	# [EMPLOYER] - [EMPLOYEE ERSTELLEN], [EMPLOYEE BEARBEITEN]
 	# [EMPLOYEE] - [EMPLOYEE BEARBEITEN]
 
-
 # Generell
+    # Bearbeiten von Employers 
     # Toasts einbinden
     # Github Inc.
-    # ToastService aufsetzen
-    # Current-/Logged User Observable setzen
+    # Login aufsetzen
+        # Anlegen neuer Employers (bei Registrierung)
+        # Anlegen neuer Employees (bei Registrierung) 
     # Favicon ändern
-    # Login aufsetzen/einbinden
 
 # v 1.0 Mitarbeiterverwaltung
     # Employer
-        # Bearbeiten und Speichern
-        # Neue Arbeitgeber Hinzufügen
-        # LogService anfangen
         # RightService aufsetzen
-        # FlagService aufsetzen
         # Arbeitgeberliste
             # Hover auf Stadt Hint: { Land, Bundesland, Postleitzahl, Stadt}
         # Erweiterung um Gründungsjahr

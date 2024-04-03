@@ -17,6 +17,7 @@
     "paths": {
       "@bau/auth": ["libs/auth/src/index.ts"],
       "@bau/core": ["libs/core/src/index.ts"],
+      "@bau/grid": ["libs/grid/src/index.ts"],
       "@bau/toast": ["libs/toast/src/index.ts"]
     }
   },

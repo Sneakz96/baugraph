@@ -1,13 +1,15 @@
 export interface Employee {
-  employeeId: string;
+  employeeId: number;
   employeeName: string;
+  employeeFirstName: string;
+  employeeLastName: string;
   employeeCountryId: number;
   employeeStreet: string;
   employeeStreetNumber: string;
   employeeLocation: string;
-  employeeCountryFlag?: string;
   employeeLocationCode: string;
   employeeBirthday: string;
   employeeEmail: string;
   employeeTelefone: string;
+  employerId: number;
 }

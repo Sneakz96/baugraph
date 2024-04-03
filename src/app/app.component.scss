@@ -1,3 +1,18 @@
 .content {
   min-height: 100%;
 }
+
+.server-status {
+  height: 8rem;
+  width: 12rem;
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  z-index: 99;
+}
+
+.circle {
+  width: .35rem;
+  height: .35rem;
+  border-radius: 50%;
+}

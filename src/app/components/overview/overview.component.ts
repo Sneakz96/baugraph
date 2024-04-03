@@ -2,7 +2,7 @@ import { AsyncPipe, CommonModule, DecimalPipe } from '@angular/common';
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { COUNTRIES, Employer, EmployerService, LogService } from '@bau/core';
+import {  Employer, EmployerService, LogService } from '@bau/core';
 import {
   FaIconLibrary,
   FontAwesomeModule,
@@ -23,7 +23,6 @@ import { NgbdSortableHeaderDirective, SortEvent } from './sort.directive';
     NgbPaginationModule,
     CommonModule,
     ReactiveFormsModule,
-    NgbHighlight,
     RouterModule,
     FontAwesomeModule,
   ],
@@ -39,7 +38,6 @@ export class OverviewComponent {
 
   @ViewChildren(NgbdSortableHeaderDirective)
   headers!: QueryList<NgbdSortableHeaderDirective>;
-  countries = COUNTRIES;
 
   constructor(
     public employerService: EmployerService,
@@ -48,12 +46,12 @@ export class OverviewComponent {
     private logService: LogService
   ) {
     this.library.addIcons(faArrowLeft);
-    this.total$ = employerService.total$;
+    this.total$ = this.employerService.total$;
     this.employers$ = this.employerService.getEmployers();
     this.employers$.subscribe({
       next: () => {
         const message = 'Das Laden der Arbeitgeber-Liste war erfolgreich';
-        this.logService.log(message, 'SUCCESS');
+        this.logService.log(message, 'INFO');
       },
       error: () => {
         const message = 'Fehler beim Laden der Arbeitgeber-Liste';
@@ -77,7 +75,8 @@ export class OverviewComponent {
   }
 
   getCountryById(countryId: number): string {
-    const country = this.countries.find((c) => c.id === countryId);
-    return country ? country.name : '';
+    // const country = this.countries.find((c) => c.id === countryId);
+    // return country ? country.name : '';
+    return'';
   }
 }

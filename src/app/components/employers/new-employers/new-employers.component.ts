@@ -12,10 +12,12 @@ import {
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {
-  COUNTRIES,
+  CountryService,
   Employer,
+  Industry,
+  IndustryService,
   LogService,
-  WebsiteValidator
+  WebsiteValidator,
 } from '@bau/core';
 import { ToastService } from '@bau/toast';
 import {
@@ -24,8 +26,9 @@ import {
 } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { INDUSTRIES } from './industries';
-import { TOAST_TYPE } from '@bau/toast';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { Country } from 'libs/core/src/models/country';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'bau-new-employers',
@@ -42,12 +45,11 @@ import { TOAST_TYPE } from '@bau/toast';
   styleUrl: './new-employers.component.scss',
 })
 export class NewEmployersComponent implements OnInit {
+  selectedCountryId = 64;
   selectedIndustrie!: number;
   employerFormGroup!: FormGroup;
   employer!: Employer;
 
-  countries = COUNTRIES;
-  industries = INDUSTRIES;
   forbiddenNames = ['Bob', 'Alice', 'OtherForbiddenName'];
 
   private fb = inject(FormBuilder);
@@ -55,7 +57,49 @@ export class NewEmployersComponent implements OnInit {
   private webValidator = inject(WebsiteValidator);
   private logService = inject(LogService);
   private toastService = inject(ToastService);
-  
+  private countryService = inject(CountryService);
+  private industryService = inject(IndustryService);
+
+  countries$!: Observable<Country[]>;
+  industries$!: Observable<Industry[]>;
+
+  constructor() {
+    this.getCountries();
+    this.getIndustries();
+  }
+
+  private getCountries() {
+    this.countryService.getCountries().subscribe({
+      next: (countries) => {
+        this.countries$ = of(countries);
+      },
+      error: (error) => {
+        const message = `Fehler beim Laden der Länderliste: ${error}`;
+        this.logService.log(message, 'Error');
+      },
+      complete: () => {
+        const message = 'Das Laden der Länderliste wurde abgeschlossen';
+        this.logService.log(message, 'INFO');
+      },
+    });
+  }
+
+  private getIndustries() {
+    this.industryService.getIndustries().subscribe({
+      next: (industries) => {
+        this.industries$ = of(industries);
+      },
+      error: (error) => {
+        const message = `Fehler beim Laden der Branchen: ${error}`;
+        this.logService.log(message, 'Error');
+      },
+      complete: () => {
+        const message = 'Das Laden der Branchen wurde abgeschlossen';
+        this.logService.log(message, 'INFO');
+      },
+    });
+  }
+
   ngOnInit(): void {
     this.library.addIcons(faArrowLeft);
     this.setEmployersForm();
@@ -69,7 +113,7 @@ export class NewEmployersComponent implements OnInit {
         Validators.maxLength(16),
         this.forbiddenNameValidator(this.forbiddenNames),
       ]),
-      employerCountry: new FormControl('', [
+      employerCountry: new FormControl(64, [
         Validators.required,
         Validators.pattern('[a-zA-Z]+'),
       ]),
@@ -125,13 +169,13 @@ export class NewEmployersComponent implements OnInit {
   onSubmit(boolean = true): void {
     if (boolean) {
       const message = 'Das Anlegen des Arbeitgebers war erfolgreich';
-      const toast = {
-        header: 'Erfolg',
-        body: message,
-        autohide: true,
-      };
+      // const toast = {
+      //   header: 'Erfolg',
+      //   body: message,
+      //   autohide: true,
+      // };
 
-      this.toastService.show(toast, TOAST_TYPE.INFO);
+      // this.toastService.show(toast, TOAST_TYPE.INFO);
       this.logService.log(message, 'SUCCESS');
     } else {
       const message = 'Das Anlegen des Arbeitgebers führte zu einem Fehler';

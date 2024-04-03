@@ -8,8 +8,9 @@ export class AuthService {
   private logService = inject(LogService);
 
   setUser(username: string, password: string): User {
-    this.logService.log(username, 'INFO');
-    return this.currentUser = {
+    const message = `Logged in as ${username}`;
+    this.logService.log(message, 'INFO');
+    return (this.currentUser = {
       title: 'Admin',
       username: username,
       password,
@@ -19,6 +20,6 @@ export class AuthService {
       age: 99,
       //   jwt:
       status: true,
-    };
+    });
   }
 }

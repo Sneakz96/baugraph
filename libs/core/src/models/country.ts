@@ -1,5 +1,5 @@
 export interface Country {
-  id: number;
-  name: string;
-  flag: string;
+  countryId: number;
+  countryName: string;
+  countryFlag: string;
 }

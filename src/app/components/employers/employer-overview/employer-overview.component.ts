@@ -11,9 +11,11 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import {
-  COUNTRIES,
+  CountryService,
   Employer,
   EmployerService,
+  Industry,
+  IndustryService,
   LogService,
   WebsiteValidator,
 } from '@bau/core';
@@ -23,9 +25,9 @@ import {
 } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { INDUSTRIES } from '../new-employers/industries';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
+import { Country } from '@bau/core';
 
 @Component({
   selector: 'bau-employer-overview',
@@ -45,9 +47,10 @@ import { HttpClientModule } from '@angular/common/http';
 export class EmployerOverviewComponent implements OnInit {
   employer!: Employer | undefined;
   employerFormGroup!: FormGroup;
-  countries = COUNTRIES;
-  industries = INDUSTRIES;
+
   employers$!: Observable<Employer[]>;
+  countries$!: Observable<Country[]>;
+  industries$!: Observable<Industry[]>;
 
   constructor(
     private library: FaIconLibrary,
@@ -55,9 +58,13 @@ export class EmployerOverviewComponent implements OnInit {
     private employerService: EmployerService,
     private fb: FormBuilder,
     private webValidator: WebsiteValidator,
-    private logService: LogService
+    private logService: LogService,
+    private countryService: CountryService,
+    private industryService: IndustryService,
   ) {
     this.library.addIcons(faArrowLeft);
+    this.getCountries();
+    this.getIndustries();
   }
 
   ngOnInit(): void {
@@ -65,6 +72,38 @@ export class EmployerOverviewComponent implements OnInit {
     this.activeRoute.params.subscribe((params) => {
       const employerId = +params['id'];
       this.getEmployer(employerId);
+    });
+  }
+
+  private getCountries() {
+    this.countryService.getCountries().subscribe({
+      next: (countries) => {
+        this.countries$ = of(countries);
+      },
+      error: (error) => {
+        const message = `Fehler beim Laden der Länderliste: ${error}`;
+        this.logService.log(message, 'Error');
+      },
+      complete: () => {
+        const message = 'Das Laden der Länderliste wurde abgeschlossen';
+        this.logService.log(message, 'INFO');
+      },
+    });
+  }
+
+  private getIndustries() {
+    this.industryService.getIndustries().subscribe({
+      next: (industries) => {
+        this.industries$ = of(industries);
+      },
+      error: (error) => {
+        const message = `Fehler beim Laden der Branchen: ${error}`;
+        this.logService.log(message, 'Error');
+      },
+      complete: () => {
+        const message = 'Das Laden der Branchen wurde abgeschlossen';
+        this.logService.log(message, 'INFO');
+      },
     });
   }
 

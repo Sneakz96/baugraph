@@ -6,8 +6,11 @@
     </div>
     <span class="fw-bold fs-xl">Arbeitgeber Übersicht</span>
   </div>
-  <form [formGroup]="employerFormGroup" (ngSubmit)="save()" class="mt-5 text-navy-60">
-
+  <form
+    [formGroup]="employerFormGroup"
+    (ngSubmit)="save()"
+    class="mt-5 text-navy-60"
+  >
     <span class="fw-bold">Name</span>
     <div class="row">
       <div class="pb-s col-6">
@@ -27,13 +30,13 @@
       <div class="pb-s col-2">
         <label for="employerCountry">Land</label>
         <ng-select
-            [items]="countries"
-            bindLabel="name"
-            bindValue="id"
-            [clearable]="false"
-            formControlName="employerCountry"
-          >
-          </ng-select>
+          [items]="countries$ | async"
+          bindLabel="countryName"
+          bindValue="countryId"
+          [clearable]="false"
+          formControlName="employerCountry"
+        >
+        </ng-select>
       </div>
       <div class="pb-s col-3">
         <label for="employerStreet">Straße</label>
@@ -114,9 +117,9 @@
       <div class="pb-s col-6">
         <label for="employerIndustry">Branche</label>
         <ng-select
-          [items]="industries"
-          bindLabel="name"
-          bindValue="id"
+          [items]="industries$ | async"
+          bindLabel="industryName"
+          bindValue="industryId"
           [clearable]="false"
           formControlName="employerIndustry"
         >
@@ -132,14 +135,11 @@
           id="employeeCount"
           formControlName="employeeCount"
         />
+        <span class="cursor-pointer" routerLink="/employees">LINK TO MA LIST</span>
       </div>
     </div>
 
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]=""
-    >
+    <button type="submit" class="btn btn-primary" [disabled]="">
       Änderungen speichern
     </button>
   </form>
