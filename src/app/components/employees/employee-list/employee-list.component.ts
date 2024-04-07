@@ -36,6 +36,7 @@ export class EmployeeListComponent {
 
   headers!: QueryList<NgbdSortableHeaderDirective>;
   headerlist = ['Name', 'Staatsangehörigkeit', 'Geburtstag', 'E-Mail'];
+
   constructor(
     private library: FaIconLibrary,
     private logService: LogService,

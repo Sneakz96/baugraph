@@ -68,7 +68,7 @@
               style="width: 20px"
             />
             <ngb-highlight
-              [result]="getCountryById(employer.employerCountryId)"
+              [result]="getCountryById(employer.employerCountryId) | async"
               [term]="employerService.searchTerm"
             />
           </td>

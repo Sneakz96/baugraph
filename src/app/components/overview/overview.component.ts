@@ -2,14 +2,14 @@ import { AsyncPipe, CommonModule, DecimalPipe } from '@angular/common';
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import {  Employer, EmployerService, LogService } from '@bau/core';
+import {  Country, CountryService, Employer, EmployerService, LogService } from '@bau/core';
 import {
   FaIconLibrary,
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { NgbHighlight, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { NgbdSortableHeaderDirective, SortEvent } from './sort.directive';
 
 @Component({
@@ -35,6 +35,7 @@ import { NgbdSortableHeaderDirective, SortEvent } from './sort.directive';
 export class OverviewComponent {
   employers$: Observable<Employer[]>;
   total$: Observable<number>;
+  countries$!: Observable<Country[]>;
 
   @ViewChildren(NgbdSortableHeaderDirective)
   headers!: QueryList<NgbdSortableHeaderDirective>;
@@ -43,7 +44,8 @@ export class OverviewComponent {
     public employerService: EmployerService,
     private library: FaIconLibrary,
     private router: Router,
-    private logService: LogService
+    private logService: LogService,
+    public countryService: CountryService
   ) {
     this.library.addIcons(faArrowLeft);
     this.total$ = this.employerService.total$;
@@ -56,6 +58,23 @@ export class OverviewComponent {
       error: () => {
         const message = 'Fehler beim Laden der Arbeitgeber-Liste';
         this.logService.log(message, 'ERROR');
+      },
+    });
+    this.getCountries();
+  }
+
+  private getCountries() {
+    this.countryService.getCountries().subscribe({
+      next: (countries) => {
+        this.countries$ = of(countries);
+      },
+      error: (error) => {
+        const message = `Fehler beim Laden der Länderliste: ${error}`;
+        this.logService.log(message, 'Error');
+      },
+      complete: () => {
+        const message = 'Das Laden der Länderliste wurde abgeschlossen';
+        this.logService.log(message, 'INFO');
       },
     });
   }
@@ -74,9 +93,12 @@ export class OverviewComponent {
     this.router.navigateByUrl(`/employer-overview/${employer.employerId}`);
   }
 
-  getCountryById(countryId: number): string {
-    // const country = this.countries.find((c) => c.id === countryId);
-    // return country ? country.name : '';
-    return'';
+  getCountryById(countryId: number): Observable<any> {
+    return this.countries$.pipe(
+      map((countries: any) => {
+        const country = countries.find((c: any) => c.countryId === countryId);
+        return country.countryName;
+      })
+    );
   }
 }

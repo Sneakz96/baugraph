@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,8 +7,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { UserService } from '@bau/core';
 import { RouterModule } from '@angular/router';
+import { User, UserService } from '@bau/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'bau-login',
@@ -20,6 +21,8 @@ import { RouterModule } from '@angular/router';
 export class LoginComponent {
   private userService = inject(UserService);
   private fb = inject(FormBuilder);
+
+  users$!: Observable<User[]>;
 
   loginForm = this.fb.group({
     username: new FormControl('', Validators.required),

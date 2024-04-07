@@ -12,7 +12,7 @@ import { ApiService } from './api.service';
 import { Country } from '../models/country';
 
 interface SearchResult {
-  employers: Employer[];
+  employers: any[];
   total: number;
 }
 

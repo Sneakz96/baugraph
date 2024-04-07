@@ -1,10 +1,9 @@
 <ng-container>
-  <ng-container> </ng-container>
   <form>
-    <!-- <div class="mb-m row">
-      <span for="table-complete-search" class="text-navy-20">Search:</span>
+    <!-- <div class="mb-m row"> -->
+      <!-- <span for="table-complete-search" class="text-navy-20">Search:</span>
       <div class="d-flex align-items-center justify-content-between"> -->
-    <!-- <input
+        <!-- <input
           id="table-complete-search"
           type="text"
           class="form-control w-25"
@@ -14,7 +13,7 @@
         @if (employerService.loading$ | async) {
         <span class="col ms-s col-form-label text-navy-20">Loading...</span>
         } -->
-    <!-- <button
+        <!-- <button
           class="btn btn-secondary my-s text-navy-0"
           routerLink="/new-employer"
         >
@@ -27,8 +26,12 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col" *ngFor="let header of headerlist" [sortable]="header">
-            <!-- (sort)="onSort($event)" -->
+          <th
+            scope="col"
+            *ngFor="let header of headerlist"
+            [sortable]="header"
+            (sort)="onSort($event)"
+          >
             <span class="fs-xs">{{ header }}</span>
           </th>
         </tr>
@@ -36,42 +39,36 @@
       <tbody>
         @for (dataRow of data | async; track dataRow.employerId) {
         <tr class="">
-          
           <th scope="row">{{ dataRow.employerId }}</th>
-          
-            <td>{{dataRow.employerName}}</td>
-            <!-- <ngb-highlight
-              [result]="dataRow.employerName"
-              [term]="employerService.searchTerm"
-            /> -->
-          
-          <!-- <td>
-            <img
-              [src]="
-                    'https://upload.wikimedia.org/wikipedia/commons/' +
-                    employer.employerCountryFlag
-                  "
-              class="me-2"
-              style="width: 20px"
-            />
-            <ngb-highlight
-              [result]="getCountryById(employer.employerCountryId)"
-              [term]="employerService.searchTerm"
-            />
-          </td> -->
 
           <td>
             <ngb-highlight
-              [result]="dataRow.employerLocation"
+              [result]="dataRow.employeeName"
               [term]="employerService.searchTerm"
-              />
+            />
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="getCountryById(dataRow.employeeCountryId) | async"
+              [term]="employerService.searchTerm"
+            />
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="dataRow.employeeBirthday"
+              [term]="employerService.searchTerm"
+            />
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="dataRow.employeeEmail"
+              [term]="employerService.searchTerm"
+            />
           </td>
         </tr>
         } @empty {
         <tr>
-          <td colspan="4" style="text-align: center">
-            Keine Arbeitgeber gefunden
-          </td>
+          <td colspan="4" style="text-align: center">Keine Daten gefunden</td>
         </tr>
         }
       </tbody>
@@ -79,14 +76,14 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <div class="text-navy-20 fs-s">
-        <!-- <span class="fw-bold" style="margin-right: 0.188rem"
-          >{{ (employers$ | async)?.length }}</span
-          > -->
-          Einträge
+        <span class="fw-bold" style="margin-right: 0.188rem"
+          >{{ (data | async)?.length }}</span
+          >
+        Einträge
       </div>
       <!-- <ngb-pagination
         class="pt-s"
-        [collectionSize]="(total$ | async)!"
+        [collectionSize]="(data | async)!"
         [(page)]="employerService.page"
         [pageSize]="employerService.pageSize"
       >
@@ -96,7 +93,7 @@
         class="form-select text-navy-20"
         style="width: auto"
         name="pageSize"
-        >
+      >
         <!-- [(ngModel)]="employerService.pageSize" -->
         <!-- <option [ngValue]="5">5 Einträge</option>
         <option [ngValue]="10">10 Einträge</option>
